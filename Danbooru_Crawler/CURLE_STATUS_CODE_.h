@@ -1,0 +1,8 @@
+#ifndef CURLE_STATUS_CODE_H
+#define CURLE_STATUS_CODE_H
+
+enum CURLE_STATUS_CODE {
+	CURLE_OK = 1,
+};
+
+#endif
