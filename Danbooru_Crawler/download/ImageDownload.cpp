@@ -2,15 +2,50 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <filesystem>
+#include <fstream>
+#include "include/nlohmann/json.hpp"
 
 namespace fs = std::filesystem;
 
 struct stat info;
 
+long long getLastedId(const char* tag) {
+	nlohmann::json j;
+
+	std::ifstream i("lastedId.json");
+	if(i.is_open()) {
+		i >> j;
+		i.close();
+	}
+
+	if(j.contains(tag)) {
+		return j[tag].get<long long>();
+	}
+
+	return 999999999;
+}
+
+void lastedIdByTag(long long& lastId, const char* tag) {
+	// This will update lastId based on the tag provided after each download session in order to avoid downloading duplicate images.
+	nlohmann::json j;
+
+	std::ifstream i("lastedId.json");
+	if(i.is_open()) {
+		i >> j;
+		i.close();
+	}
+
+	j[tag] = lastId;
+
+	std::ofstream o("lastedId.json");
+	o << j.dump(4);
+	o.close();
+}
+
 void createImgUrlTxt(std::vector<std::string> imgUrls, const std::string& path) {
 	FILE* txtPath = fopen(path.c_str(), "w");
 
-	for (int i = 0; i < imgUrls.size(); ++i) {
+	for (int i = 0; i < (int)imgUrls.size(); ++i) {
 		fprintf(txtPath, "%s\n", imgUrls[i].c_str());
 	}
 

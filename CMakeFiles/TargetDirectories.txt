@@ -1,0 +1,3 @@
+D:/Code/Danbooru_Crawler/CMakeFiles/Danbooru_Crawler.dir
+D:/Code/Danbooru_Crawler/CMakeFiles/edit_cache.dir
+D:/Code/Danbooru_Crawler/CMakeFiles/rebuild_cache.dir

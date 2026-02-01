@@ -8,10 +8,12 @@
 
 #include "danbooru/DanbooruClient.h"
 #include "config/UserSettingParser.h"
-#include "nlohmann/json.hpp"
+#include "include/nlohmann/json.hpp"
 #include "cstdlib"
 
 #define DEBUG(x) std::cout << x << '\n'
+
+const long long MAX_POST_ID = 99999999;
 
 const std::string destFolder = "images";
 const std::string imgUrlPath = "images.txt";
@@ -29,6 +31,7 @@ std::string fetchJSON(const std::string& url) {
 
 	curl = curl_easy_init();
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());;
+	curl_easy_setopt(curl, CURLOPT_CAINFO, "cacert.pem");
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "DanbooruClient/1.0");
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
@@ -71,32 +74,50 @@ int main() {
 		userSetting = parseUserSettings(menu.getChoice());
 	}
 
-	const std::string requestUrl = buildDanbooruUrl(API_URL.c_str(), userSetting);
-
-	userSetting.debug();
-	DEBUG(requestUrl);
+	const std::string requestUrl = buildDanbooruUrl(API_URL.c_str(), userSetting) + "page=b" + std::to_string(MAX_POST_ID);
+	DEBUG("Request URL: " + requestUrl);
 
 	const std::string rawData = fetchJSON(requestUrl);
+
+	if(rawData.empty()) {
+		std::cerr << "Failed to fetch data from Danbooru API." << std::endl;
+		return 1;
+	}
 
 	try {
 		nlohmann::json jsondata = nlohmann::json::parse(rawData);
 		vector < std::string > imgUrls;
+		long long lastedId = getLastedId(userSetting.tags.c_str());
+		long long newestId = lastedId;
+		std::cout << "Current lastedId for tag \"" << userSetting.tags << "\": " << lastedId << std::endl;
 
 		if (jsondata.empty()) {
 			std::cout << "Response data is empty.";
 		}
 		else {
-			for (int i = 0; i < jsondata.size(); i++) {
+			for (int i = 0; i < (int)jsondata.size(); i++) {
 				nlohmann::json post = jsondata[i];
+
+				if(!post.contains("id")) continue;
+
+				long long postId = post["id"].get<long long>();
+				std::cout << "Post ID: " << postId << std::endl;
+
+				if(postId >= lastedId) {
+					continue;
+				}
 
 				if (post.contains("file_url") && post["file_url"].is_string())
 				{
 					imgUrls.push_back(static_cast<std::string>(jsondata[i]["file_url"]));
+					newestId = std::min(newestId, postId);
+					std::cout << "newestId updated to: " << newestId << std::endl;
 				}
 			}
 
 			// Create to a .txt file
 			createImgUrlTxt(imgUrls, imgUrlPath);
+			lastedIdByTag(newestId, userSetting.tags.c_str());
 			
 			if (userSetting.isDownload) {
 				downloadImg(imgUrlPath, destFolder);

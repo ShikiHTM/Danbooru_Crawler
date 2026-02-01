@@ -48,7 +48,7 @@ void Menu::clearScreen() {
 
 void Menu::printCenter(const std::string& text, int width) {
 	int padding = (int)(width - text.length()) / 2;
-	std::cout << std::string(max(0, padding), ' ') << text << std::endl;
+	std::cout << std::string(std::max(0, padding), ' ') << text << std::endl;
 }
 
 void Menu::displayMenu() {
@@ -65,13 +65,13 @@ void Menu::displayMenu() {
 		if (opt.type == MenuOptionType::Toggle || opt.type == MenuOptionType::Choice || opt.type == MenuOptionType::TextInput) {
 			len += 4;
 		}
-		maxLength = max(maxLength, len);
+		maxLength = std::max(maxLength, len);
 	}
 
 	int padding = (width - maxLength) / 2;
-	padding = max(0, padding);
+	padding = std::max(0, padding);
 
-	for (int i = 0; i < option.size(); i++) {
+	for (int i = 0; i < (int)option.size(); i++) {
 		std::string optionText = (i == selectedIndex ? " > " : "   ") + option[i].name + " ";
 		if (option[i].type == MenuOptionType::Toggle) {
 			optionText += "[" + std::string(option[i].toggle ? "X" : " ") + "]";
@@ -122,7 +122,7 @@ void Menu::show() {
 		if (key == 0 || key == 224) {
 			key = _getch();
 			if (key == UP && selectedIndex > 0) selectedIndex--;
-			else if (key == DOWN && selectedIndex < option.size() - 1) selectedIndex++;
+			else if (key == DOWN && selectedIndex < (int)option.size() - 1) selectedIndex++;
 			else if (key == LEFT || key == RIGHT) {
 				if (option[selectedIndex].type == MenuOptionType::Choice) {
 					int& index = option[selectedIndex].selectedChoiceIndex;

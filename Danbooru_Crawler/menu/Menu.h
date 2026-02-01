@@ -35,10 +35,10 @@ struct MenuOption {
 	std::string name;
 	MenuOptionType type;
 
-	vector<std::string> queryChoice;
+	vector<std::string> queryChoice = {};
 	int selectedChoiceIndex = 0;
 	bool toggle = false;
-	std::string input;
+	std::string input = "";
 
 	std::string displayValue() const;
 };
