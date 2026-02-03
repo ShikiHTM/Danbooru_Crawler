@@ -1,6 +1,16 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "config/UserSetting.h"
+#include "net/HttpClient.h"
 
-std::string buildDanbooruUrl(const char* apiUrl, const UserSettings& s);
+struct DanbooruPost {
+    long long id;
+    std::string file_url;
+};
+
+class DanbooruClient {
+    public:
+        std::vector<DanbooruPost> fetchPosts(const std::string& requestUrl, HttpClient& httpClient);
+};

@@ -1,132 +1,79 @@
 #include <iostream>
-#include <curl/curl.h>
-#include <stdlib.h>
-#include "menu/Menu.h"
 #include <vector>
+#include <string>
 #include "config/UserSetting.h"
-#include "download/ImageDownload.h"
-
-#include "danbooru/DanbooruClient.h"
 #include "config/UserSettingParser.h"
-#include "include/nlohmann/json.hpp"
-#include "cstdlib"
+#include "danbooru/DanbooruQuery.h"
+#include "danbooru/DanbooruClient.h"
+#include "net/HttpClient.h"
+#include "download/ImageDownload.h"
+#include "download/DownloadState.h"
+#include "menu/Menu.h"
 
 #define DEBUG(x) std::cout << x << '\n'
-
-const long long MAX_POST_ID = 99999999;
 
 const std::string destFolder = "images";
 const std::string imgUrlPath = "images.txt";
 
-size_t write_callback(void* content, size_t size, size_t nmemb, std::string* output) {
-	size_t totalSize = size * nmemb;
-	output->append((char*)content, totalSize);
-	return totalSize;
+void writeUrlToFile(std::vector<std::string>& imgUrls) {
+	FILE* file = fopen(imgUrlPath.c_str(), "w");
+	if (file == nullptr) {
+		std::cerr << "Error opening file for writing: " << imgUrlPath << std::endl;
+		return;
+	}
+	for (const auto& url : imgUrls) {
+		fprintf(file, "%s\n", url.c_str());
+	}
+	fclose(file);
 }
 
-std::string fetchJSON(const std::string& url) {
-	CURL* curl;
-	CURLcode res;
-	std::string response;
+void runCrawler() {
+	DanbooruQuery query("DanbooruApiKey", "DanbooruApiUser");
+	DanbooruClient client;
+	DownloadState state;
+	ImageDownloader downloader;
+	HttpClient httpClient;
 
-	curl = curl_easy_init();
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());;
-	curl_easy_setopt(curl, CURLOPT_CAINFO, "cacert.pem");
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
-	curl_easy_setopt(curl, CURLOPT_USERAGENT, "DanbooruClient/1.0");
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+	Menu menu;
 
-	res = curl_easy_perform(curl);
+	menu.show();
 
-	if (res != CURLE_OK) {
-		std::cerr << "Curl_easy_perform failed: " << curl_easy_strerror(res) << std::endl;
-		response = {};
+	const std::vector<MenuOption>& choices = menu.getChoice();
+
+	UserSettings settings = parseUserSettings(choices);
+
+	long long cursor = state.getOldestId(settings.tags.c_str());
+
+	const std::string requestUrl = query.buildUrl(settings, cursor);
+
+	auto posts = client.fetchPosts(requestUrl, httpClient);
+
+	if(posts.empty()) return;
+
+	std::vector<std::string> imgUrls;
+	long long oldestId = cursor;
+
+	for(const auto& post: posts) {
+		imgUrls.push_back(post.file_url);
+		oldestId = std::min(oldestId, post.id);
 	}
 
-	curl_easy_cleanup(curl);
-	return response;
+	if(settings.isDownload) {
+		writeUrlToFile(imgUrls);
+		downloader.downloadImages(imgUrlPath, destFolder);
+	}
+
+	state.updateOldestId(oldestId, settings.tags.c_str());
 }
 
 int main() {
-	const char* apiKeyEnv = std::getenv("DanbooruApiKey");
-	const char* userEnv = std::getenv("DanbooruApiUser");
-
-	if (!apiKeyEnv || !userEnv) {
-		std::cerr << "Missing Danbooru API environment variables\n";
-		std::exit(1);
-	}
-
-	const std::string API_KEY(apiKeyEnv);
-	const std::string API_LOGIN_USERNAME(userEnv);
-
-	const std::string API_URL = "https://danbooru.donmai.us/posts.json?api_key=" + API_KEY + "&login=" + API_LOGIN_USERNAME + "&";
-
-	Menu menu;
-	menu.show();
-
-	UserSettings userSetting = parseUserSettings(menu.getChoice());
-
-	while (userSetting.statusCode == -1) {
-		std::cerr << "Invalid input. Please try again." << std::endl;
-		system("pause");
-		menu.clear();
-		menu.show();
-		userSetting = parseUserSettings(menu.getChoice());
-	}
-
-	const std::string requestUrl = buildDanbooruUrl(API_URL.c_str(), userSetting) + "page=b" + std::to_string(MAX_POST_ID);
-	DEBUG("Request URL: " + requestUrl);
-
-	const std::string rawData = fetchJSON(requestUrl);
-
-	if(rawData.empty()) {
-		std::cerr << "Failed to fetch data from Danbooru API." << std::endl;
-		return 1;
-	}
-
 	try {
-		nlohmann::json jsondata = nlohmann::json::parse(rawData);
-		vector < std::string > imgUrls;
-		long long lastedId = getLastedId(userSetting.tags.c_str());
-		long long newestId = lastedId;
-		std::cout << "Current lastedId for tag \"" << userSetting.tags << "\": " << lastedId << std::endl;
-
-		if (jsondata.empty()) {
-			std::cout << "Response data is empty.";
-		}
-		else {
-			for (int i = 0; i < (int)jsondata.size(); i++) {
-				nlohmann::json post = jsondata[i];
-
-				if(!post.contains("id")) continue;
-
-				long long postId = post["id"].get<long long>();
-				std::cout << "Post ID: " << postId << std::endl;
-
-				if(postId >= lastedId) {
-					continue;
-				}
-
-				if (post.contains("file_url") && post["file_url"].is_string())
-				{
-					imgUrls.push_back(static_cast<std::string>(jsondata[i]["file_url"]));
-					newestId = std::min(newestId, postId);
-					std::cout << "newestId updated to: " << newestId << std::endl;
-				}
-			}
-
-			// Create to a .txt file
-			createImgUrlTxt(imgUrls, imgUrlPath);
-			lastedIdByTag(newestId, userSetting.tags.c_str());
-			
-			if (userSetting.isDownload) {
-				downloadImg(imgUrlPath, destFolder);
-			}
-		}
+		runCrawler();
 	}
-	catch (const nlohmann::json::parse_error& err) {
-		std::cerr << "json_parse failed: " << err.what() << std::endl;
+	catch (const std::exception& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+		return EXIT_FAILURE;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }

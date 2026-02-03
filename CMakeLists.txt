@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(Danbooru_Crawler VERSION 1.0.0)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -13,7 +13,6 @@ endif()
 
 set(SRC_ROOT ${CMAKE_SOURCE_DIR}/Danbooru_Crawler)
 
-# ===== CURL =====
 find_package(CURL REQUIRED)
 
 file(GLOB_RECURSE SRC_FILES
@@ -22,13 +21,13 @@ file(GLOB_RECURSE SRC_FILES
     ${SRC_ROOT}/download/*.cpp
     ${SRC_ROOT}/menu/*.cpp
     ${SRC_ROOT}/config/*.cpp
+    ${SRC_ROOT}/net/*.cpp
 )
 
 add_executable(${PROJECT_NAME}
     ${SRC_FILES}
 )
 
-# ===== INCLUDE =====
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${SRC_ROOT}
@@ -39,7 +38,6 @@ target_include_directories(${PROJECT_NAME}
         ${SRC_ROOT}/thirdParty
 )
 
-# ===== LINK (CHỖ QUAN TRỌNG NHẤT) =====
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
         CURL::libcurl

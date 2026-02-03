@@ -46,45 +46,66 @@ build cmake_object_order_depends_target_Danbooru_Crawler: phony || .
 
 build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/Danbooru_Crawler.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/Danbooru_Crawler.cpp || cmake_object_order_depends_target_Danbooru_Crawler
   DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\Danbooru_Crawler.cpp.obj.d
-  FLAGS = -std=c++17 -Wall -Wextra -Wpedantic
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler
 
 build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/config/UserSetting.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/config/UserSetting.cpp || cmake_object_order_depends_target_Danbooru_Crawler
   DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\config\UserSetting.cpp.obj.d
-  FLAGS = -std=c++17 -Wall -Wextra -Wpedantic
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\config
 
 build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/config/UserSettingParser.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/config/UserSettingParser.cpp || cmake_object_order_depends_target_Danbooru_Crawler
   DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\config\UserSettingParser.cpp.obj.d
-  FLAGS = -std=c++17 -Wall -Wextra -Wpedantic
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\config
 
 build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/danbooru/DanbooruClient.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru/DanbooruClient.cpp || cmake_object_order_depends_target_Danbooru_Crawler
   DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\danbooru\DanbooruClient.cpp.obj.d
-  FLAGS = -std=c++17 -Wall -Wextra -Wpedantic
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\danbooru
 
+build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/danbooru/DanbooruQuery.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru/DanbooruQuery.cpp || cmake_object_order_depends_target_Danbooru_Crawler
+  DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\danbooru\DanbooruQuery.cpp.obj.d
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
+  OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
+  OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\danbooru
+
+build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/download/DownloadState.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/download/DownloadState.cpp || cmake_object_order_depends_target_Danbooru_Crawler
+  DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\download\DownloadState.cpp.obj.d
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
+  OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
+  OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\download
+
 build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/download/ImageDownload.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/download/ImageDownload.cpp || cmake_object_order_depends_target_Danbooru_Crawler
   DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\download\ImageDownload.cpp.obj.d
-  FLAGS = -std=c++17 -Wall -Wextra -Wpedantic
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\download
 
 build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/menu/Menu.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/menu/Menu.cpp || cmake_object_order_depends_target_Danbooru_Crawler
   DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\menu\Menu.cpp.obj.d
-  FLAGS = -std=c++17 -Wall -Wextra -Wpedantic
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
   INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\menu
+
+build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/net/HttpClient.cpp.obj: CXX_COMPILER__Danbooru_Crawler_unscanned_ D$:/Code/Danbooru_Crawler/Danbooru_Crawler/net/HttpClient.cpp || cmake_object_order_depends_target_Danbooru_Crawler
+  DEP_FILE = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\net\HttpClient.cpp.obj.d
+  FLAGS = -std=c++20 -Wall -Wextra -Wpedantic
+  INCLUDES = -ID:/Code/Danbooru_Crawler/Danbooru_Crawler -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/danbooru -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/download -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/menu -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/config -ID:/Code/Danbooru_Crawler/Danbooru_Crawler/thirdParty -isystem C:/Users/Shiki/scoop/apps/curl/current/include
+  OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
+  OBJECT_FILE_DIR = CMakeFiles\Danbooru_Crawler.dir\Danbooru_Crawler\net
 
 
 # =============================================================================
@@ -94,7 +115,7 @@ build CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/menu/Menu.cpp.obj: CXX_CO
 #############################################
 # Link the executable Danbooru_Crawler.exe
 
-build Danbooru_Crawler.exe: CXX_EXECUTABLE_LINKER__Danbooru_Crawler_ CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/Danbooru_Crawler.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/config/UserSetting.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/config/UserSettingParser.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/danbooru/DanbooruClient.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/download/ImageDownload.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/menu/Menu.cpp.obj | C$:/Users/Shiki/scoop/apps/curl/current/lib/libcurl.dll.a
+build Danbooru_Crawler.exe: CXX_EXECUTABLE_LINKER__Danbooru_Crawler_ CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/Danbooru_Crawler.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/config/UserSetting.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/config/UserSettingParser.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/danbooru/DanbooruClient.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/danbooru/DanbooruQuery.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/download/DownloadState.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/download/ImageDownload.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/menu/Menu.cpp.obj CMakeFiles/Danbooru_Crawler.dir/Danbooru_Crawler/net/HttpClient.cpp.obj | C$:/Users/Shiki/scoop/apps/curl/current/lib/libcurl.dll.a
   LINK_LIBRARIES = C:/Users/Shiki/scoop/apps/curl/current/lib/libcurl.dll.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Danbooru_Crawler.dir
   POST_BUILD = cd .
